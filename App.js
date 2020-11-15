@@ -6,6 +6,8 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
+  Image
 } from 'react-native';
 
 import {
@@ -20,31 +22,55 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {MainPage} from './src/MainPage';
 import {Details} from './src/Details'
+import { AddFilm } from "./src/AddFilm";
 
 const Stack = createStackNavigator(); 
-const App = () => {
+const App = ({ navigation }) => {
+
 
 
   return (
-  <>
+  
+<NavigationContainer >
 
-<NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator  >
+                
+                  
                 <Stack.Screen 
+                    
                     name="Films"
                     component={MainPage}
+                    options={({navigation}) => ({
+                      headerRight: () => (
+                        <View>
+                          <Image source={require('./src/plus.png')}/>
+                        </View>
+                      )
+                    })}
                 />
-                    <Stack.Screen 
+                
+               
+                <Stack.Screen 
                     name="Details"
                     component={Details}
+                    
+                />
+                <Stack.Screen 
+                    name="AddFilm"
+                    component={AddFilm}
                 />
               </Stack.Navigator>
+              
 </NavigationContainer>
  
-  </>
+  
   );
 };
+const styles = StyleSheet.create({
+  container: {
 
+  }
+});
 
 
 export default App;

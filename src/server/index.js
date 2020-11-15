@@ -25,8 +25,10 @@ MongoClient.connect(url, function(err, client) {
 
 
 app.get('/films', (req, res) => {
+    console.log(1)
     db.collection('films').find({}).toArray((err, docs) => {
         res.json(docs);
+
     })
 });
 
@@ -42,6 +44,7 @@ app.get('/films/:id', (req, res) => {
 });
 
 app.post('/films', (req, res) => {
+    console.log(req.body)
     db.collection('films').insertOne(req.body);
 
     return res.json({
