@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     backgroundColor: "pink",
     height: "100%",
-    alignItems: "center"
-    
+    alignItems: "flex-start",
+    paddingLeft: 10
   },
   text: {
     fontSize: 25,
@@ -120,6 +120,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 60,
-    alignItems: "center",
+    alignItems: "center"
   }
 });

@@ -25,11 +25,16 @@ MongoClient.connect(url, function(err, client) {
 
 
 app.get('/films', (req, res) => {
-    console.log(1)
+    const { search } = req.query;
+    console.log(search);
     db.collection('films').find({}).toArray((err, docs) => {
-        res.json(docs);
+
+        console.log(docs);
+        res.json(docs.filter(item=>item.Title.toLowerCase().includes(search.toLowerCase())));
 
     })
+
+
 });
 
 app.get('/films/:id', (req, res) => {

@@ -6,6 +6,8 @@ export const AddFilm = ( { navigation }) => {
     const [valueTitle, setValueTitle] = useState('');
     const [valueYear, setValueYear] = useState('');
     const [valueFormat, setValueFormat] = useState('');
+    const [valueStars, setValueStars] = useState([]);
+    const arrStars = []; 
     
 
     const sendObj = () => {
@@ -26,9 +28,17 @@ export const AddFilm = ( { navigation }) => {
         .then(res => res.json)
         .then(
             navigation.navigate('Films')
-        )
-       
-    }
+        )}
+
+
+
+   const pushStarInArr = ()=> {
+   setValueStars([valueStars]);   
+   
+   }
+   console.log(valueStars);
+
+   
 
     return (
      <View style={styles.container}>
@@ -56,7 +66,18 @@ export const AddFilm = ( { navigation }) => {
              />
         </View>
 
-        <Text style={styles.button}><Button color="black" title="ADD" onPress={() => sendObj(  )}/></Text>
+        <View style={styles.boxInput}>
+            <Text style={styles.text}>Stars</Text>
+            <Text><Button title="Add" onPress={() => pushStarInArr()}/></Text>
+            <TextInput 
+            style={styles.input}
+            onChangeText={(star)=>setValueStars(star)}
+             />
+        </View>
+    <Text>{valueStars}</Text>
+
+
+        <Text style={styles.button}><Button color="magenta" title="ADD" onPress={() => sendObj()}/></Text>
      </View>
     )
 }
@@ -75,14 +96,15 @@ const styles = StyleSheet.create({
         borderTopWidth: 0,
         borderLeftWidth:0,
         borderRightWidth:0,
-        borderWidth: 2,
-        borderColor: "black",
+        borderWidth: 2.5,
+        borderColor: "magenta",
         marginBottom: 50
     },
     text: {
         fontSize: 22,
         fontFamily: "Cochin",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: "magenta"
     },
     input: {
         fontSize: 18

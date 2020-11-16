@@ -42,8 +42,13 @@ const App = ({ navigation }) => {
                     component={MainPage}
                     options={({navigation}) => ({
                       headerRight: () => (
-                        <View>
-                          <Image source={require('./src/plus.png')}/>
+                        <View onPress={() => { 
+                          navigation.navigate('AddFilm') 
+                         }}>
+                          <Image 
+                             source={require('./src/plus.png')}
+
+                          />
                         </View>
                       )
                     })}

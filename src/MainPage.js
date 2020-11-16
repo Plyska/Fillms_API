@@ -7,6 +7,7 @@ import {
     Text,
     StatusBar,
     Button,
+    TextInput
 } from 'react-native';
 import {
     Header,
@@ -24,15 +25,26 @@ export const MainPage = ({ navigation }) => {
 
     const [filmsList, setFilmsList] = useState([]);
     const [button, setButton] = useState(false);
+    const [search, setSearch] = useState("");
     const appContext = useContext(AppContext);
 
 
-
     useEffect(() => {
-        fetch("http://192.168.31.105:3000/films")
+        fetch(`http://192.168.31.105:3000/films?search=${search}` )
             .then(res => res.json())
             .then(res => {
-                setFilmsList(res);
+                setFilmsList(res.sort((a,b) => {
+                    let nameA = a.Title.toLowerCase();
+                    let nameB = b.Title.toLowerCase();
+                    if(nameA < nameB) {
+                        return - 1;
+                    }
+                     else if (nameA > nameB) {
+                        return 1;
+                    } else{
+                        return 0;
+                    }
+                }));
             })
             .catch((error) => {
                 console.log("API call error");
@@ -41,12 +53,20 @@ export const MainPage = ({ navigation }) => {
                 console.error(error);
 
             })
-    }, [filmsList])
+    }, [filmsList, search])
 
     return (
 
         <ScrollView style={styles.box}>
             <View >
+                <View style={{margin: 20}}>
+                    <TextInput 
+                    placeholder="search"
+                    onChangeText={(text) => { 
+                        setSearch(text);                    
+                    }}
+                    />
+                </View>
             <Text onPress={() => { navigation.navigate('AddFilm') }}>Add Film</Text>
             <View style={styles.container}>
 
@@ -83,7 +103,8 @@ const styles = StyleSheet.create({
         backgroundColor: "pink"
     },
     container: {
-        alignItems: "center",
+        alignItems: "flex-start",
+        marginLeft: 10
     },
     boxText: {
         marginTop: 20,
