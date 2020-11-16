@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 import { Text } from 'react-native';
+import {backEndAdress} from './backEndAdress';
 
 export const Details = ({route, navigation}) => {
 
@@ -9,7 +10,7 @@ export const Details = ({route, navigation}) => {
 
 
     useEffect(()=> {
-    fetch("http://192.168.31.105:3000/films/" + route.params.id)
+    fetch(`${backEndAdress}/films/` + route.params.id)
     .then(res => res.json())
     .then(res => {
         setFilm(res);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import {backEndAdress} from './backEndAdress';
 
 
 export const AddFilm = ( { navigation }) => {
@@ -11,7 +12,7 @@ export const AddFilm = ( { navigation }) => {
     
 
     const sendObj = () => {
-        fetch("http://192.168.31.105:3000/films", {
+        fetch(`${backEndAdress}/films`, {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -77,7 +78,7 @@ export const AddFilm = ( { navigation }) => {
     <Text>{valueStars}</Text>
 
 
-        <Text style={styles.button}><Button color="magenta" title="ADD" onPress={() => sendObj()}/></Text>
+        <Text style={styles.button}><Button color="black" title="ADD" onPress={() => sendObj()}/></Text>
      </View>
     )
 }

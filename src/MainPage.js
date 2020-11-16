@@ -16,21 +16,21 @@ import {
     DebugInstructions,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import AppContext from './App.Context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Details } from './Details'
+import {backEndAdress} from './backEndAdress';
 
 export const MainPage = ({ navigation }) => {
 
     const [filmsList, setFilmsList] = useState([]);
     const [button, setButton] = useState(false);
     const [search, setSearch] = useState("");
-    const appContext = useContext(AppContext);
 
+   
 
     useEffect(() => {
-        fetch(`http://192.168.31.105:3000/films?search=${search}` )
+        fetch(`${backEndAdress}/films?search=${search}` )
             .then(res => res.json())
             .then(res => {
                 setFilmsList(res.sort((a,b) => {
