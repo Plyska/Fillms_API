@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 30,
         alignItems: "center",
-        backgroundColor: "pink",
         height: "100%"
     },
     boxInput: {
@@ -97,14 +96,14 @@ const styles = StyleSheet.create({
         borderLeftWidth:0,
         borderRightWidth:0,
         borderWidth: 2.5,
-        borderColor: "magenta",
+        borderColor: "black",
         marginBottom: 50
     },
     text: {
         fontSize: 22,
         fontFamily: "Cochin",
         fontWeight: "bold",
-        color: "magenta"
+        color: "black"
     },
     input: {
         fontSize: 18

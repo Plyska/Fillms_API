@@ -57,7 +57,7 @@ export const MainPage = ({ navigation }) => {
 
     return (
 
-        <ScrollView style={styles.box}>
+        <ScrollView>
             <View >
                 <View style={{margin: 20}}>
                     <TextInput 
@@ -99,9 +99,6 @@ export const MainPage = ({ navigation }) => {
 
 
 const styles = StyleSheet.create({
-    box: {
-        backgroundColor: "pink"
-    },
     container: {
         alignItems: "flex-start",
         marginLeft: 10

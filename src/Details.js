@@ -78,7 +78,6 @@ const deleteFilm = () => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
-    backgroundColor: "pink",
     height: "100%",
     alignItems: "flex-start",
     paddingLeft: 10
