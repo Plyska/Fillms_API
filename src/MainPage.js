@@ -7,7 +7,8 @@ import {
     Text,
     StatusBar,
     Button,
-    TextInput
+    TextInput,
+    Image
 } from 'react-native';
 import {
     Header,
@@ -58,16 +59,20 @@ export const MainPage = ({ navigation }) => {
     return (
 
         <ScrollView>
-            <View >
-                <View style={{margin: 20}}>
+            <View>
+            <View style={styles.search}>
+                <Image 
+                    source={require('./search.png')}
+                />
+                <View>
                     <TextInput 
-                    placeholder="search"
+                    placeholder="Search"
                     onChangeText={(text) => { 
                         setSearch(text);                    
                     }}
                     />
                 </View>
-            <Text onPress={() => { navigation.navigate('AddFilm') }}>Add Film</Text>
+            </View>
             <View style={styles.container}>
 
                 {filmsList.map((films) => (
@@ -86,6 +91,7 @@ export const MainPage = ({ navigation }) => {
 
                     </View>
                 ))}
+                { filmsList.length === 0 ? <Text style={styles.textNoFound}>No films found</Text> : null}
 
             </View>
             </View>
@@ -100,18 +106,35 @@ export const MainPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "flex-start",
-        marginLeft: 10
+        marginRight: 15,
+        marginLeft: 15
     },
     boxText: {
         marginTop: 20,
         borderBottomColor: 'black',
         borderBottomWidth: 0.5
-     },
+    },
      text: {
          fontSize: 17,
          fontFamily: "Cochin",
          fontWeight: "bold"
-     }
+    },
+    textNoFound: {
+        marginTop: 40,
+        textAlign: "center",
+        fontWeight: "bold"
+    },
+    search: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginRight: 15,
+        marginTop: 15,
+        marginLeft: 15,
+        borderTopWidth: 0,
+        borderLeftWidth:0,
+        borderRightWidth:0,
+        borderWidth: 2.5,
+    }
 });
 

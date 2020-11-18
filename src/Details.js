@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View, StyleSheet } from 'react-native';
-import { Text } from 'react-native';
+import { Button, View, StyleSheet, Text, Alert } from 'react-native';
 import {backEndAdress} from './backEndAdress';
+
 
 export const Details = ({route, navigation}) => {
 
@@ -18,9 +18,30 @@ export const Details = ({route, navigation}) => {
 
 }, [id])
 
-const deleteFilm = () => {
 
-   
+const getAlert = () => {
+    Alert.alert(
+    "Delete",
+    "are you sure you want to delete this film?",
+    [
+      {
+        text: "No",
+        onPress: () => null,
+        style: "cancel"
+      },
+      {
+        text: "Yes",
+        onPress: () => deleteFilm(),
+      }
+    ],
+    { 
+      cancelable: false,
+    }
+  );
+
+}
+
+const deleteFilm = () => {
         fetch("http://192.168.31.105:3000/films/" + route.params.id, {
             method: "delete"
         })
@@ -62,10 +83,11 @@ const deleteFilm = () => {
              <Text>{star}{"\n"}</Text>
             ))}</Text></View>     
     </View>
-
-        <Text style={styles.button}>
-          <Button color="black" title="DELETE" onPress={() => deleteFilm()}/>
-        </Text>    
+        <View style={styles.button}>
+        <Text >
+          <Button color="black" title="DELETE" onPress={() => getAlert()}/>
+        </Text> 
+        </View>   
 </View>
           
   : <Text>Text loading...</Text>}
@@ -80,8 +102,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
     height: "100%",
-    alignItems: "flex-start",
-    paddingLeft: 10
+    paddingLeft: 20
   },
   text: {
     fontSize: 25,

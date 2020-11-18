@@ -7,7 +7,8 @@ import {
   Text,
   StatusBar,
   Button,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -42,15 +43,16 @@ const App = ({ navigation }) => {
                     component={MainPage}
                     options={({navigation}) => ({
                       headerRight: () => (
-                        <View onPress={() => { 
+                        <TouchableOpacity onPress={() => { 
                           navigation.navigate('AddFilm') 
                          }}>
                           <Image 
-                             source={require('./src/plus.png')}
+                            source={require('./src/plus.png')}
 
                           />
-                        </View>
-                      )
+                        </TouchableOpacity>
+                      ),
+                      headerTitle: <Text>FILMS</Text>,
                     })}
                 />
                 
