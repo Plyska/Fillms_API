@@ -24,17 +24,16 @@ MongoClient.connect(url, function (err, client) {
 
 app.get('/films', (req, res) => {
   const {search} = req.query;
-  const query = {
+  const query = search ? {
     $or: [
       {Title: {$regex: `${search}\.`, $options: 'i'}},
       {Stars: {$regex: `${search}\.`, $options: 'i'}},
     ],
-  };
+  } : {};
   db.collection('films')
     .find(query)
     .sort({Title: 1})
     .toArray((err, docs) => {
-      // res.json(docs.filter(item=>item.Title.toLowerCase().includes(search.toLowerCase())));
       res.json(docs);
     });
 });
@@ -53,8 +52,15 @@ app.get('/films/:id', (req, res) => {
 });
 
 app.post('/films', (req, res) => {
+  const query = {};
+  if (req.body.Title) {
+    query.Title = req.body.Title;
+  }
+  if (req.body.ReleaseYear) {
+    query.ReleaseYear = req.body.ReleaseYear;
+  }
   db.collection('films')
-    .find({Title: req.body.Title, ReleaseYear: req.body.ReleaseYear})
+    .find(query)
     .toArray((err, docs) => {
       if (!docs.length) {
         db.collection('films').insertOne(req.body);

@@ -36,7 +36,7 @@ export const Details = ({route, navigation}) => {
   };
 
   const deleteFilm = () => {
-    fetch('http://192.168.31.105:3000/films/' + route.params.id, {
+    fetch(`${backEndAdress}/films/` + route.params.id, {
       method: 'delete',
     })
       .then((res) => res.json())
