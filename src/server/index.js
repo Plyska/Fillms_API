@@ -19,19 +19,19 @@ MongoClient.connect(url, function (err, client) {
 
   db = client.db(dbName);
 
-  //   client.close();
 });
 
 app.get('/films', (req, res) => {
   const {search} = req.query;
   const query = search ? {
     $or: [
-      {Title: {$regex: `${search}\.`, $options: 'i'}},
-      {Stars: {$regex: `${search}\.`, $options: 'i'}},
+      {Title: {$regex: `${search}`, $options: 'i'}},
+      {Stars: {$regex: `${search}`, $options: 'i'}},
     ],
   } : {};
   db.collection('films')
     .find(query)
+    .collation({locale: "en", caseFirst: "upper"})
     .sort({Title: 1})
     .toArray((err, docs) => {
       res.json(docs);
